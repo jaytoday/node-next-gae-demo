@@ -1,18 +1,18 @@
 {
   "name": "node-next-gae-demo",
-  "version": "v0.3.3",
+  "version": "v1.0.0",
   "description": "A universal react next.js app designed to work for Google App Engine's Node.js Early Access Program",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next dev -p ${PORT:-3000}",
     "build": "next build",
-    "start": "node server.js",
-    "start-local": "NODE_ENV=production PORT=8080 node server.js",
-    "lint": "eslint .",
+    "start": "next start -p ${PORT:-8080}",
+    "start-local": "NODE_ENV=production next start -p ${PORT:-8080}",
+    "lint": "next lint",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy:gae": "gcloud --project blaine-garrett app deploy app.yaml --version main --verbosity=debug",
-    "docker:build:dev": "docker build -t gae-node-next-demo -f ./ci/build.dev.Dockerfile .",
-    "docker:run:dev": "docker run -p 3000:8000 gae-node-next-demo",
+    "docker:build:dev": "docker build -t gae-node-next-demo:dev -f ./ci/build.dev.Dockerfile .",
+    "docker:run:dev": "docker run -p 3000:8000 gae-node-next:demo",
     "docker:build:production": "docker build -t gae-node-next-demo:prod -f ./ci/build.production.Dockerfile .",
     "docker:run:production": "docker run -p 8080:8000 gae-node-next-demo:prod",
     "cloudbuild:production": "gcloud builds submit  --verbosity=debug --ignore-file=./ci/build.gcloudignore --config=./ci/build.production.cloudbuild.yaml --project=blaine-garrett"
@@ -44,18 +44,14 @@
   },
   "homepage": "https://github.com/blainegarrett/node-next-gae-demo#readme",
   "dependencies": {
-    "axios": "^0.19.0",
-    "compression": "^1.7.4",
-    "express": "^4.17.1",
-    "next": "^9.1.1",
+    "axios": "^0.24.0",
+    "next": "^12.0.4",
     "prop-types": "^15.7.2",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.3",
-    "eslint": "^5.16.0",
-    "eslint-plugin-react": "^7.16.0",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint": "7.32.0",
+    "eslint-config-next": "12.0.4"
   }
 }
